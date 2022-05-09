@@ -29,7 +29,7 @@ You'll need an Azure subscription and a very small set of tools and skills to ge
 
 The resultant application is an Azure Container Environment-hosted set of containers - the `products` API, the `inventory` API, and the `store` Blazor Server front-end.
 
-![Topology diagram](docs/media/topology.png)
+![Application topology](docs/media/topology.png)
 
 Internet traffic should not be able to directly access either of the back-end APIs as each of these containers is marked as "internal ingress only" during the deployment phase. Internet traffic hitting the `store.<your app>.<your region>.azurecontainerapps.io` URL should be proxied to the `frontend` container, which in turn makes outbound calls to both the `products` and `inventory` APIs within the Azure Container Apps Environment.
 
