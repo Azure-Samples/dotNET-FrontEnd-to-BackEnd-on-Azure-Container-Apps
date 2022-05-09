@@ -77,7 +77,7 @@ az ad sp create-for-rbac --sdk-auth --name WebAndApiSample --role contributor --
 
 The easiest way to deploy the code is to make a commit directly to the `deploy` branch. Do this by navigating to the `deploy.yml` file in your browser and clicking the `Edit` button. 
 
-![Edit the deployment workflow file.](C:\Users\brady\source\Store\docs\media\edit-the-deploy-file.png)
+![Edit the deployment workflow file.](docs/media/edit-the-deploy-file.png)
 
 Provide a custom resource group name for the app, and then commit the change to a new branch named `deploy`. 
 
