@@ -1,0 +1,55 @@
+﻿@page "/"
+@using Microsoft.Extensions.Caching.Memory
+@inject IStoreBackendClient _storeBackendClient
+@inject IMemoryCache _memoryCache
+
+<PageTitle>Index</PageTitle>
+
+<h1>Products in the store:</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Inventory</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in _products)
+        {
+            <tr>
+                <td>@product.ProductName</td>
+                <td>@product.Quantity</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@code
+{
+    List<Product> _products = new List<Product>();
+    bool _shouldRender = false;
+    protected override bool ShouldRender() => _shouldRender;
+    const string cacheKey = "PRODUCTS";
+
+    protected override async Task OnInitializedAsync()
+    {
+        Product[] tmp;
+        if (!_memoryCache.TryGetValue(cacheKey, out tmp))
+        {
+            var products = await _storeBackendClient.GetProducts();
+            foreach (var product in products)
+            {
+                product.Quantity = await _storeBackendClient.GetInventory(product.ProductId);
+            }
+            _products = products.ToList();
+            _memoryCache.Set<Product[]>(cacheKey, _products.ToArray());
+            tmp = _products.ToArray();
+        }
+        _products = tmp.ToList();
+
+        _shouldRender = true;
+    }
+}
