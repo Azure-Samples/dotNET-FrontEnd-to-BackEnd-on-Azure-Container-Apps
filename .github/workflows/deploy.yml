@@ -8,7 +8,8 @@ on:
 env:
   
   # alphanumeric string under 14 characters
-  RESOURCE_GROUP_NAME: bradygstore03
+  RESOURCE_GROUP_NAME: store
+
 
   # specify your preferred region
   REGION: eastus
