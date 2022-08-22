@@ -10,6 +10,7 @@ env:
   # alphanumeric string under 14 characters
   RESOURCE_GROUP_NAME: store
 
+
   # specify your preferred region
   REGION: eastus
 
@@ -112,14 +113,6 @@ jobs:
       with:
         creds: ${{ secrets.AzureSPN }}
 
-    - name: Installing Container Apps extension
-      uses: azure/CLI@v1
-      with:
-        inlineScript: >
-          az config set extension.use_dynamic_install=yes_without_prompt
-
-          az extension add --name containerapp --yes
-
     - name: Login to ACR
       run: |
         set -euo pipefail
@@ -131,6 +124,8 @@ jobs:
       uses: azure/CLI@v1
       with:
         inlineScript: >
+          az config set extension.use_dynamic_install=yes_without_prompt
+          
           az containerapp registry set -n products -g ${{ env.RESOURCE_GROUP_NAME }} --server ${{ env.RESOURCE_GROUP_NAME }}acr.azurecr.io
 
           az containerapp update -n products -g ${{ env.RESOURCE_GROUP_NAME }} -i ${{ env.RESOURCE_GROUP_NAME }}acr.azurecr.io/${{ env.PRODUCTS_IMAGE }}:${{ github.sha }}
