@@ -71,6 +71,10 @@ az ad sp create-for-rbac --sdk-auth --name WebAndApiSample --role contributor --
 
    ![The AzureSPN secret in GitHub](docs/media/secrets.png)
 
+5. Create a second GitHub secret in your fork of this repository named `AZURE_SUBSCRIPTION_ID`. Provide the specific Azure subscription you want to impact as the value for this secret. Ocne finished, the two secrets' names will show on the page. 
+
+   ![The AzureSPN and subscription id secrets in GitHub](docs/media/secrets2.png)
+
 > Note: Never save the JSON to disk, for it will enable anyone who obtains this JSON code to create or edit resources in your Azure subscription. 
 
 ## Deploy the code using GitHub Actions

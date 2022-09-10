@@ -27,20 +27,17 @@ jobs:
         with:
           creds: ${{ secrets.AzureSPN }}
 
-      - name: Set env
-        run: echo "AZURE_SUBSCRIPTION_ID=$(az account show --query id)" >> $GITHUB_ENV
-
       - name: Azure Dev Provision
         run: azd provision --no-prompt
         env:
           AZURE_ENV_NAME: ${{ env.RESOURCE_GROUP_NAME }}
           AZURE_LOCATION: ${{ env.REGION }} 
-          AZURE_SUBSCRIPTION_ID: ${{ env.AZURE_SUBSCRIPTION_ID }}
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Azure Dev Deploy
         run: azd deploy --no-prompt
         env:
           AZURE_ENV_NAME: ${{ env.RESOURCE_GROUP_NAME }}
           AZURE_LOCATION: ${{ env.REGION }} 
-          AZURE_SUBSCRIPTION_ID: ${{ env.AZURE_SUBSCRIPTION_ID }}
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
