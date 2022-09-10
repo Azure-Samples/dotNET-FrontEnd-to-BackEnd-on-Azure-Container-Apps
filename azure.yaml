@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: AcaStore
+services:
+  inventory:
+    project: src/Store.InventoryApi
+    dist: build
+    language: csharp
+    host: containerapp
+    module: modules/inventory
+    docker:
+      path: ./Dockerfile
+      context: ../
+  products:
+    project: src/Store.ProductApi
+    dist: build
+    language: csharp
+    host: containerapp
+    module: modules/products
+    docker:
+      path: ./Dockerfile
+      context: ../
+  store:
+    project: src/Store
+    dist: build
+    language: csharp
+    host: containerapp
+    module: modules/store
+    docker:
+      path: ./Dockerfile
+      context: ../
