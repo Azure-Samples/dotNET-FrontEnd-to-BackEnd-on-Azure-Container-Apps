@@ -8,7 +8,7 @@ on:
 env:
   
   # alphanumeric string under 14 characters
-  RESOURCE_GROUP_NAME: rgustomcha
+  RESOURCE_GROUP_NAME: rgustomchar
 
   # specify your preferred region
   REGION: westus
