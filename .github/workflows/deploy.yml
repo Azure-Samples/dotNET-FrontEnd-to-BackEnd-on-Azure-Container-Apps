@@ -8,7 +8,7 @@ on:
 env:
   
   # alphanumeric string under 14 characters
-  RESOURCE_GROUP_NAME: hadrapp
+  RESOURCE_GROUP_NAME: hadr
 
   # specify your preferred region
   REGION: westus
