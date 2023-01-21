@@ -8,6 +8,7 @@ on:
 env:
   
   # alphanumeric string under 14 characters limit
+  # the "rg" prefix will be added on build
   RESOURCE_GROUP_NAME: ernstore
 
   # specify your preferred region
@@ -21,7 +22,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
+        
+#updated to full support azd
       - name: Log in with Azure (Client Credentials)
         run: |
           $info = $Env:AZURE_CREDENTIALS | ConvertFrom-Json -AsHashtable;
