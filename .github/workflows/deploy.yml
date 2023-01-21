@@ -7,7 +7,7 @@ on:
     
 env:
   
-  # alphanumeric string under 14 characters
+  # alphanumeric string under 14 characters limit
   RESOURCE_GROUP_NAME: rg_ernstore
 
   # specify your preferred region
