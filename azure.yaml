@@ -1,13 +1,15 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 
-name: AcaStore
+name: dotnet-frontend-to-multiple-api-backends
+metadata:
+  template: dotnet-frontend-to-multiple-api-backends@2.0.0
 services:
   inventory:
     project: src/Store.InventoryApi
     dist: build
     language: csharp
     host: containerapp
-    module: modules/inventory
+    module: app/inventory
     docker:
       path: ./Dockerfile
       context: ../
@@ -16,7 +18,7 @@ services:
     dist: build
     language: csharp
     host: containerapp
-    module: modules/products
+    module: app/products
     docker:
       path: ./Dockerfile
       context: ../
@@ -25,7 +27,7 @@ services:
     dist: build
     language: csharp
     host: containerapp
-    module: modules/store
+    module: app/store
     docker:
       path: ./Dockerfile
       context: ../

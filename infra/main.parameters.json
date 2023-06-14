@@ -7,6 +7,15 @@
         },
         "location": {
             "value": "${AZURE_LOCATION}"
+        },
+        "storeAppExists": {
+            "value": "${SERVICE_STORE_RESOURCE_EXISTS=false}"
+        },
+        "inventoryAppExists": {
+            "value": "${SERVICE_INVENTORY_RESOURCE_EXISTS=false}"
+        },
+        "productsAppExists": {
+            "value": "${SERVICE_PRODUCTS_RESOURCE_EXISTS=false}"
         }
     }
 }
