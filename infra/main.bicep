@@ -93,6 +93,8 @@ module store 'app/store.bicep' = {
     containerRegistryName: containerApps.outputs.registryName
     identityName: storeIdentity.outputs.identityName
     aiConnectionString: monitoring.outputs.applicationInsightsConnectionString
+    inventoryServiceName: inventory.outputs.SERVICE_INVENTORY_NAME
+    productsServiceName: products.outputs.SERVICE_PRODUCTS_NAME
   }
 }
 
