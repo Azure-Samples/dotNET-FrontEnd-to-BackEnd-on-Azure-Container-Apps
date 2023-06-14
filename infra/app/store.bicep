@@ -7,6 +7,8 @@ param containerRegistryName string
 param exists bool
 param aiConnectionString string
 param serviceName string = 'store'
+param inventoryServiceName string = 'inventory'
+param productsServiceName string = 'products'
 
 resource identity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
   name: identityName
@@ -39,11 +41,11 @@ module app '../core/host/container-app-upsert.bicep' = {
       }
       {
         name: 'InventoryApi'
-        value: 'http://inventory'
+        value: 'http://${inventoryServiceName}'
       }
       {
         name: 'ProductsApi'
-        value: 'http://products'
+        value: 'http://${productsServiceName}'
       }
     ]
     targetPort: 80
