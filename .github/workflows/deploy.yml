@@ -32,7 +32,7 @@ jobs:
         env:
           AZURE_ENV_NAME: ${{ env.RESOURCE_GROUP_NAME }}
           AZURE_LOCATION: ${{ env.REGION }} 
-          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_SUBSCRIPTION_ID: ${399a9511-0e2f-453d-92cd-c2e31e0639a8}
 
       - name: Azure Dev Deploy
         run: azd deploy --no-prompt
