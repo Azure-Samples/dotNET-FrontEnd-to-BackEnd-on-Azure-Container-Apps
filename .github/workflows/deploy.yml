@@ -18,6 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/azure-dev-cli-apps:latest
+    env:
+        AZURE_CREDENTIALS: ${{ secrets.AzureSPN }}
+        AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
+        AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+        AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -35,17 +40,17 @@ jobs:
         env:
           AZURE_CREDENTIALS: ${{ secrets.AzureSPN }}
 
-      - name: Azure Dev Provision
+      - name: Provision Azure Resources - Azure Container Apps, Container Registry, Azure Monitor, Log Analytics
         run: azd provision --no-prompt
         env:
-          AZURE_ENV_NAME: ${{ env.RESOURCE_GROUP_NAME }}
-          AZURE_LOCATION: ${{ env.REGION }} 
-          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
+          AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+          AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Azure Dev Deploy
+      - name: Deploy changes to Azure Container Apps
         run: azd deploy --no-prompt
         env:
-          AZURE_ENV_NAME: ${{ env.RESOURCE_GROUP_NAME }}
-          AZURE_LOCATION: ${{ env.REGION }} 
-          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
+          AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+          AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
 
