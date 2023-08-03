@@ -1,17 +1,12 @@
-name: Build and deploy .NET application to Azure Container Apps
-
 on:
+  workflow_dispatch:
   push:
     branches:
-    - deploy
-    
-env:
-  
-  # alphanumeric string under 14 characters
-  RESOURCE_GROUP_NAME: bradygstore01
+      - deploy
 
-  # specify your preferred region
-  REGION: westus
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   build:
@@ -19,15 +14,26 @@ jobs:
     container:
       image: mcr.microsoft.com/azure-dev-cli-apps:latest
     env:
+        AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
         AZURE_CREDENTIALS: ${{ secrets.AzureSPN }}
         AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
         AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
         AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Login with AZD
+      - name: Log in with Azure (Federated Credentials)
+        if: ${{ env.AZURE_CLIENT_ID != '' }}
+        run: |
+          azd auth login `
+            --client-id "$Env:AZURE_CLIENT_ID" `
+            --federated-credential-provider "github" `
+            --tenant-id "$Env:AZURE_TENANT_ID"
+        shell: pwsh
+
+      - name: Log in with Azure (Client Credentials)
+        if: ${{ env.AZURE_CREDENTIALS != '' }}
         run: |
           $info = $Env:AZURE_CREDENTIALS | ConvertFrom-Json -AsHashtable;
           Write-Host "::add-mask::$($info.clientSecret)"
@@ -53,4 +59,3 @@ jobs:
           AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
           AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
           AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
-
