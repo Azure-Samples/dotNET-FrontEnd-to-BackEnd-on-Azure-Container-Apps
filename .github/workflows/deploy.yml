@@ -4,6 +4,14 @@ on:
     branches:
       - deploy
 
+env:
+
+  # alphanumeric string under 14 characters
+  RESOURCE_GROUP_NAME: bradygstore02
+
+  # specify your preferred region
+  REGION: westus
+
 permissions:
   id-token: write
   contents: read
@@ -15,8 +23,8 @@ jobs:
       image: mcr.microsoft.com/azure-dev-cli-apps:latest
     env:
         AZURE_CREDENTIALS: ${{ secrets.AzureSPN }}
-        AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
-        AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+        AZURE_ENV_NAME: ${{ env.RESOURCE_GROUP_NAME }}
+        AZURE_LOCATION: ${{ env.REGION }}
         AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
     steps:
       - name: Checkout
