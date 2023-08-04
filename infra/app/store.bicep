@@ -26,6 +26,8 @@ module app '../core/host/container-app-upsert.bicep' = {
     exists: exists
     containerAppsEnvironmentName: containerAppsEnvironmentName
     containerRegistryName: containerRegistryName
+    containerMaxReplicas: 1
+    containerMinReplicas: 1
     env: [
       {
         name: 'ASPNETCORE_ENVIRONMENT'
