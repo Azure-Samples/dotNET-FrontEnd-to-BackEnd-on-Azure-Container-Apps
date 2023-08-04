@@ -47,7 +47,7 @@ By the end of this section you'll have a 3-node app running in Azure. This setup
 
 ```bash
 $subscriptionId=$(az account show --query id --output tsv)
-az ad sp create-for-rbac --sdk-auth --name WebAndApiSample --role contributor --scopes /subscriptions/$subscriptionId
+az ad sp create-for-rbac --sdk-auth --name WebAndApiSample --role owner --scopes /subscriptions/$subscriptionId
 ```
 
 3. Copy the JSON written to the screen to your clipboard. 
