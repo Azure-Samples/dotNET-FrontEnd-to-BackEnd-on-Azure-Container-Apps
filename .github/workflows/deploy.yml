@@ -7,7 +7,7 @@ on:
 env:
 
   # alphanumeric string under 14 characters
-  RESOURCE_GROUP_NAME: bradygstore02
+  RESOURCE_GROUP_NAME: cloud-shell-storage-westus
 
   # specify your preferred region
   REGION: westus
