@@ -10,7 +10,7 @@ env:
   RESOURCE_GROUP_NAME: containerstore
 
   # specify your preferred region
-  REGION: westus
+  REGION: norwayeast
 
 permissions:
   id-token: write
